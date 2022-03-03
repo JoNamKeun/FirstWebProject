@@ -1,0 +1,191 @@
+@font-face {
+    font-family: 'KyoboHandwriting2020A';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2112@1.0/KyoboHandwriting2020A.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'KyoboHandwriting2020A';
+}
+
+#logo{
+    animation-name: fade-in;
+    animation-duration: 10s;
+    /*animation-delay: 1s;*/
+    animation-iteration-count : infinite;
+    animation-fill-mode: forwards;
+}
+
+body{
+    background-color: #153259;
+    box-sizing: border-box;
+    color: white;
+}
+
+.container{
+    width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    vertical-align: middle;
+}
+
+.main{
+    box-sizing: border-box;
+    width: 600px;
+    height: 500px;
+    padding: 50px;
+    /*border-right: 1px solid #e9e9e9;*/
+}
+
+img{
+    width: 500px;
+    height: 500px;
+}
+
+table{
+    margin: auto auto;
+    width: 600px;
+    height: 200px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 30px;
+    padding: 10px;
+}
+
+.select_btn{
+    width: 1200px;
+    height: 50px;
+    margin: 50px auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1ch;
+}
+
+button{
+    width: 60px;
+    height: 50px;
+}
+
+.btn_join{
+    margin-left: auto;
+    margin-right: 30px;
+}
+
+.btn_login{
+    margin-right: auto;
+    margin-left: 30px;
+}
+
+button{
+    background:#ffe647;
+    color:#153259;
+    border:none;
+    position:relative;
+    height:60px;
+    /*padding:0 2em;*/
+    cursor:pointer;
+    transition:800ms ease all;
+    outline:none;
+  }
+  button:hover{
+    background:#153259;
+    color:white;
+  }
+  button:before,button:after{
+    content:'';
+    position:absolute;
+    top:0;
+    right:0;
+    height:2px;
+    width:0;
+    background: #ffe647;
+    transition:400ms ease all;
+  }
+  button:after{
+    right:inherit;
+    top:inherit;
+    left:0;
+    bottom:0;
+  }
+  button:hover:before,button:hover:after{
+    width:100%;
+    transition:800ms ease all;
+  }
+  
+@keyframes fade-in {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes fade-in{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fade-in{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+@-o-keyframes fade-in{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+@keyframes fade-in {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes fade-in{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fade-in{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+@-o-keyframes fade-in{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
