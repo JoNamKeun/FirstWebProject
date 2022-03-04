@@ -50,9 +50,18 @@
         			<th>작성자</th>
         			<th>제목</th>
         			<th>작성일</th>
-        			<th>조회수</th>
         		</tr>
+        		<c:forEach var="board" items="${requestScope.list}">
+        			<tr>
+        				<td>${board.bno}</td>
+        				<td>${board.b_kind}</td>
+        				<td>${board.b_writer}</td>
+        				<td>${board.title}</td>
+        				<td>${board.regist_day}</td>
+        			</tr>
+        		</c:forEach>
         	</table>
+        	
         	<form action="write.do">
         		<input type="button" value="글쓰기">
         	</form>
