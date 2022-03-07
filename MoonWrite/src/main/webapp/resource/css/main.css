@@ -118,5 +118,5 @@ ul li a{
     margin-top: 30px;
     text-align: center;
     padding: 10px;
-    border: 1px solid red; /* 작업하실 때 해당 부분은 지우고 하셔도 됩니다. */
+    /* border: 1px solid red; 작업하실 때 해당 부분은 지우고 하셔도 됩니다. */
 }

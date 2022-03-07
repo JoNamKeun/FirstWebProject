@@ -3,5 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.diary.moon.board.mapper.MemberMapper">
-	
+	<select id="selectOne" resultType="member">
+		select * from members where m_level = 'a'
+	</select>
 </mapper>

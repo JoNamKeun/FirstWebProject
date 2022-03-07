@@ -1,0 +1,271 @@
+@charset "UTF-8";
+@font-face {
+    font-family: 'KyoboHandwriting2020A';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2112@1.0/KyoboHandwriting2020A.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'KyoboHandwriting2020A';
+}
+
+body{
+    background-color: #153259;
+    box-sizing: border-box;
+    color: white;
+    margin: 0 auto;
+    width: 1500px;
+    display: flex;
+    flex-direction: row;
+    background-image: url("/resource/img/back_img.jpg");
+}
+
+input, textarea{
+    background-color: rgba(21, 50, 89, 0.2);
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 3px solid rgba(255, 230, 71, 0.8);
+    color: white;
+    font-size: 16px;
+    word-spacing: 3px;
+}
+
+input::placeholder, textarea::placeholder{
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* menu css 영역 시작 */
+
+.logo_menu{
+    background-color: rgba(21, 50, 89, 0.2);
+    width: 500px;
+    height: auto;
+    margin: 30px auto;
+    position: fixed;
+    text-align: center;
+}
+
+.logo_menu header{
+    height: 300px;
+}
+
+.logo_menu nav{
+    top: 500px;
+    margin-top: 30px;
+}
+
+.logo_menu header img{
+    padding: 10px;
+    box-sizing: border-box;
+    margin: 0 auto;
+    width: 240px;
+    height: 240px;
+}
+
+.title{
+    text-align: center;
+    font-size: 30px;
+}
+
+ul, ol{
+	list-style:none;
+}
+ul{
+    display: flex;
+    flex-direction: column;
+}
+
+ul li a{
+    width: auto;
+}
+
+.header ul:after{
+	content:"";
+	display:block;
+	clear:both
+}
+.header ul li{
+	float:left;
+	border-left:1px solid rgba(255, 255, 255, 0);
+    box-sizing:border-box;
+    width:100%; 
+    margin-top: 50px;
+}
+.header ul li:first-child{
+	border-left:none;
+}
+.header ul li a{
+	display:block;
+	height:60px;
+	text-align:center;
+    line-height:60px;
+    font-size:20px;
+    text-decoration:none;
+    color:#fff;
+}
+
+.header ul li a:hover{
+    border-radius: 10px;
+    background-color: #ffe647;
+    color: black;
+    margin: 0 150px;
+}
+
+/* menu 영역 여기까지*/
+
+.content{
+    /*background-color: #153259;*/
+    background-color: rgba(21, 50, 89, 0.2);
+    box-sizing: border-box;
+    width: 1000px;
+    height: auto;
+    margin-left: 500px;
+    margin-top: 150px;
+    margin-bottom: 150px;
+    text-align: center;
+    padding: 10px;
+    /*border: 1px solid red;*/
+}
+
+.content h2{
+    width: 1000px;
+}
+
+.board_write{
+    width: auto;
+    margin: 0;
+    margin-top: 30px;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+}
+
+.select_write, .select_secret{
+    width: 300px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.board_write div input{
+    margin-left: 10px;
+}
+
+.board_write div label {
+    font-size: 20px;
+    margin-left: 10px;
+}
+
+.book_search{
+    width: 1000px;
+    height: 50px;
+    margin: 20px auto;
+}
+
+.book_search label{
+    margin-right: 30px;
+    font-size: 20px;
+}
+
+.book_search input {
+    margin-right: 30px;
+    font-size: 20px;
+}
+
+.book_search button{
+    width: 100px;
+    height: 30px;
+}
+
+button,
+button::after {
+  -webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+button {
+  background: none;
+  border: 3px solid #fff;
+  border-radius: 5px;
+  color: #fff;
+  position: relative;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+button::before,
+button::after {
+  /*background: #fff;*/
+  background: #ffe647;
+  content: '';
+  position: absolute;
+  z-index: -1;
+}
+
+button:hover {
+  color: black;
+  border: 3px solid #153259;
+  border-radius: 5px;
+}
+
+.btn_search::after,
+.btn_submit::after,
+.btn_cancel::after {
+    height: 0;
+    left: 50%;
+    top: 50%;
+    width: 0;
+}
+
+.btn_search:hover:after,
+.btn_submit:hover:after,
+.btn_cancel:hover:after {
+    height: 100%;
+    left: 0;
+    top: 0;
+    width: 100%;
+}
+
+.board_title > input{
+    width: 700px;
+    height: 30px;
+    margin-bottom: 20px;
+}
+
+.board_content textarea{
+    width: 700px;
+    height: 300px;
+    line-height: 30px;
+}
+
+.btn_group{
+    width: 500px;
+    height: 50px;
+    margin-left: 600px;
+    display: flex;
+    flex-direction: row;
+}
+
+.btn_group button{
+    width: 100px;
+    margin-left: 20px;
+}
+
+/*input-textarea placeholder 글자 색상 변경 코드*/
+input::-webkit-input-placeholder {
+    color: #ffe647;
+}
+  input:-ms-input-placeholder {
+    color: #ffe647;
+}
+textarea::-webkit-input-placeholder {
+    color: #ffe647;
+}
+textarea:-ms-input-placeholder {
+    color: #ffe647;
+}

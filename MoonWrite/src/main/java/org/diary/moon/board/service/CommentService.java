@@ -1,0 +1,22 @@
+package org.diary.moon.board.service;
+
+import java.util.List;
+
+import org.diary.moon.board.mapper.CommentMapper;
+import org.diary.moon.dto.CommentDTO;
+import org.springframework.stereotype.Service;
+
+@Service
+public class CommentService {
+	CommentMapper mapper;
+
+	public CommentService(CommentMapper mapper) {
+		this.mapper = mapper;
+	}
+
+	public List<CommentDTO> selectCommentList(String b_writer) {
+		return mapper.selectCommentList(b_writer);
+	}
+	
+	
+}

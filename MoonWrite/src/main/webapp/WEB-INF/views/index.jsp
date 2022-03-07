@@ -24,8 +24,8 @@
 		</table>
 	</div>
 	<div class="select_btn">
-		<button class="btn_join">회원가입</button>
-		<button class="btn_login">로그인</button>
+		<button class="btn_join" onclick="location.href='join.do'">회원가입</button>
+		<button class="btn_login" onclick="location.href='login.do'">로그인</button>
 		<button class="btn_main" onclick = "location.href='main.do'">메인화면</button>
 	</div>
 </body>

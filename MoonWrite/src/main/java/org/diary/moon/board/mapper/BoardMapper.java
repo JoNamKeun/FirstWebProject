@@ -10,6 +10,8 @@ public interface BoardMapper {
 
 	List<BoardDTO> selectBoardList(int page);
 
-	int selectAllCount();
+	int selectAllCount(String b_writer);
+
+	List<BoardDTO> selectList(String b_writer);
 
 }
