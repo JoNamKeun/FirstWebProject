@@ -69,6 +69,17 @@ public class BoardDTO {
 	public void setB_writer(String b_writer) {
 		this.b_writer = b_writer;
 	}
+	public BoardDTO(String title, String content, String b_kind, String b_secret, String book_name, String b_writer) {
+		super();
+		this.title = title;
+		this.content = content;
+		this.b_kind = b_kind;
+		this.b_secret = b_secret;
+		this.book_name = book_name;
+		this.b_writer = b_writer;
+	}
+	
+	
 	
 	
 	

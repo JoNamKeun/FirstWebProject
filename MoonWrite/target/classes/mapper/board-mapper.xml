@@ -4,16 +4,52 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.diary.moon.board.mapper.BoardMapper">
 	<!-- 전체 게시글 리스트 뷰 -->
-	<select id="selectBoardList" parameterType="int" resultType="board">
-		select * from (select ceil(rownum / 7) as pageno, b.* from 
-				(select * from board_list order by bno desc) b) where pageno = #{page}
+	<select id="selectBoardList" parameterType="int"
+		resultType="board">
+		select * from (select ceil(rownum / 7) as pageno, b.* from
+		(select * from board_list order by bno desc) b) where pageno = #{page}
 	</select>
 	<!-- 작성자 게시글에 맞는 페이지 개수 구하는 쿼리 -->
-	<select id="selectAllCount" resultType="int" parameterType="String">
-		select count(*) from board_list where b_writer = #{b_writer}
+	<select id="selectAllCount" resultType="int"
+		parameterType="String">
+		select count(*) from board_list where b_writer =
+		#{b_writer}
 	</select>
 	<!-- 내가 게시한 작성글만 보여주는 리스트 -->
-	<select id="selectList" resultType="board" parameterType="String">
+	<select id="selectList" resultType="board"
+		parameterType="String">
 		select * from board where b_writer = #{b_writer}
 	</select>
+	
+	<select id="selectBoard" parameterType="int" resultType="board">
+		select * from board_no_secret_list where bno=#{bno}
+	</select>
+
+
+	<select id="selectBoardLikeCount" parameterType="int"
+		resultType="int">
+		select count(*) from board_like where bno=#{bno}
+	</select>
+
+	<select id="selectUserLikeTrue" parameterType="java.util.Map"
+		resultType="int">
+		select count(*) from board_like
+		where m_id like #{m_id} and bno = #{bno}
+	</select>
+
+
+	<insert id="insertBoardLike" parameterType="map">
+		insert into
+		board_like values(#{m_id}, #{bno})
+	</insert>
+
+	<delete id="deleteBoardLike" parameterType="map">
+		delete from
+		board_like where m_id like #{m_id} and bno = #{bno}
+	</delete>
+	
+	<insert id="insertBoard" parameterType="board">
+		insert into
+		board values(#{title}, #{content}, #{chk_info}, #{chk_secret}, #{book_name}, #{b_writer}) 
+	</insert>
 </mapper>

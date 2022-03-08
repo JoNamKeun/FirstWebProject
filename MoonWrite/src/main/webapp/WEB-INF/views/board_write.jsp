@@ -11,27 +11,7 @@
 <link rel="stylesheet" href="/resource/css/board_write.css">
 </head>
 <body>
-	<div class="logo_menu">
-		<header>
-			<img src="/resource/img/logo.png" alt="logo" id="header_logo">
-			<div class="title">
-				<h2>Moon Write</h2>
-			</div>
-		</header>
-		<nav>
-			<div class="header">
-				<ul>
-					<li>AAA(aaa)님<br>
-						<p>정보수정 / 로그아웃</p>
-					</li>
-					<li class="on" class="a"><a href="#">메인페이지</a></li>
-					<li><a href="#">My Diary</a></li>
-					<li><a href="#">사람들의 이야기</a></li>
-					<li><a href="#">책 추천</a></li>
-				</ul>
-			</div>
-		</nav>
-	</div>
+	<%@ include file="../include/menuBar.jsp"%>
 	<div class="content">
 		<h2>게시판 글쓰기</h2>
 		<form action="write.do"> <!-- form 영역 -->

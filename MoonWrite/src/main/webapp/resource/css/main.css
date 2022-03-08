@@ -25,6 +25,7 @@ body{
     width: 500px;
     height: auto;
     margin: 0 auto;
+    margin-top: 50px;
     position: fixed;
     border: 1px solid yellow;
     text-align: center;
@@ -52,39 +53,6 @@ body{
     font-size: 30px;
 }
 
-h1{
-	margin: 20px;
-}
-
-table{
-	width: 100%;
-	border-collapse: collapse;
-}
-th, td{
-	border-top : 1px solid gray;
-	border-bottom : 1px solid gray;
-}
-th{
-	padding: 20px;
-}
-.count{
-	float: right;
-	margin: 15px;
-}
-a:link, a:visited{
-	text-decoration: none;
-	color: white;
-}
-
-
-/*
-.content div{position:relative; padding-top: 30px;}
-.content div p{position:absolute;
-    top:30%;margin-top:-40px;
-    text-align:center;width:100%;
-    font-size:50px;font-weight:bold;color:#fff}
-html, body{overflow-y:hidden}
-.header{position:fixed;z-index:10;top:0;width:100%} */
 ul, ol{list-style:none}
 ul{
     display: flex;
@@ -94,13 +62,30 @@ ul{
 ul li a{
     width: auto;
 }
-.header ul:after{content:"";display:block;clear:both}
-.header ul li{float:left;border-left:1px solid rgba(255, 255, 255, 0);
-    box-sizing:border-box;width:100%; margin-top: 50px;}
-.header ul li:first-child{border-left:none}
-.header ul li a{display:block;height:60px;text-align:center;
-    line-height:60px;font-size:20px;text-decoration:none;
-    color:#fff}
+.header ul:after{
+	content:"";
+	display:block;
+	clear:both
+}
+.header ul li{
+	float:left;
+	border-left:1px solid rgba(255, 255, 255, 0);
+    box-sizing:border-box;
+    width:100%; 
+    margin-top: 50px;
+}
+.header ul li:first-child{
+	border-left:none;
+}
+.header ul li a{
+	display:block;
+	height:60px;
+	text-align:center;
+    line-height:60px;
+    font-size:20px;
+    text-decoration:none;
+    color:#fff;
+}
 
 .header ul li a:hover{
     border-radius: 10px;
@@ -109,14 +94,173 @@ ul li a{
     margin: 0 150px;
 }
 
-/* menu ì˜ì—­ ì—¬ê¸°ê¹Œì§€*/
+/* menu ¿µ¿ª ¿©±â±îÁö*/
 
 .content{
     width: 1000px;
     margin: 0 auto;
     margin-left: 500px;
-    margin-top: 30px;
+    margin-top: 50px;
     text-align: center;
     padding: 10px;
-    /* border: 1px solid red; ì‘ì—…í•˜ì‹¤ ë•Œ í•´ë‹¹ ë¶€ë¶„ì€ ì§€ìš°ê³  í•˜ì…”ë„ ë©ë‹ˆë‹¤. */
+    border: 1px solid red; /* ÀÛ¾÷ÇÏ½Ç ¶§ ÇØ´ç ºÎºĞÀº Áö¿ì°í ÇÏ¼Åµµ µË´Ï´Ù. */
+}
+
+/* ¿ìÃø ÇÏ´Ü¿¡ ÀÖ´Â À§·Î ¿Ã¸®´Â ¹öÆ° */
+.btn_up{ 
+	top: 90%;
+	left: 90%;
+	width: 50px;
+	height: 50px;
+	border-radius: 80%;
+	background-color: #ffffff;
+	border: #ffe647 3px solid;
+	position: fixed;
+	z-index: 2;
+}
+
+.btn_up:hover{
+	background-color: #153259;
+	color: #ffe647;
+}
+/* ¿ìÃø ÇÏ´Ü¿¡ ÀÖ´Â À§·Î ¿Ã¸®´Â ¹öÆ° */
+
+.content1{
+    margin-top: 100px;
+}
+
+.content1 h1{
+    font-size: 48px;
+    color: #ffe647;
+    animation: backimage 5s ease 0s infinite alternate-reverse;
+}
+
+.content1 p{
+    margin-top: 20px;
+    font-size: 24px;
+    line-height: 50px;
+    animation-name: fade-in;
+    animation-duration: 10s;
+    animation-delay: 1s;
+    animation-fill-mode: forwards;
+}
+
+.content2{
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+}
+
+.left_div img, .right_div img{
+    width: 240px;
+    height: 240px;
+}
+
+.left_div{
+    margin-left: 100px;
+}
+
+.right_div{
+    margin-left: 100px;
+}
+
+.content3{
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 100px;
+    padding: 50px;
+    /*border: 1px solid white;*/
+}
+
+.content3 h2{
+    font-size: 48px;
+    color: #ffe647;
+}
+
+.content3 p{
+    margin-top: 10px;
+    font-size: 24px;
+    line-height: 40px;
+}
+
+.p_name{
+    float: right;
+}
+/* ¾Ö´Ï¸ŞÀÌ¼Ç È¿°ú css */
+@keyframes backimage {
+    from{ opacity: 1;}
+    to{ opacity: 0.4;}
+}
+
+@keyframes fade-in {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes fade-in{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fade-in{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+@-o-keyframes fade-in{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+@keyframes fade-in {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes fade-in{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fade-in{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+@-o-keyframes fade-in{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
 }

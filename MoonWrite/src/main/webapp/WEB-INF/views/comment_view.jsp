@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>Moon Write</title>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
-<link rel="stylesheet" href="resource/css/main.css">
+<link rel="stylesheet" href="resource/css/my_diary.css">
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script src="/resource/js/main_scroll.js"></script>
 <link rel="icon" href="/resource/img/diary.png">
@@ -42,8 +42,8 @@
         <h1>나의 발자취</h1>
         <div class="main_content">
         	<table>
-        	<span class="count">내가 쓴 글 갯수 : <a href="#">60</a></span>
-        	<span class="count">내가 쓴 댓글 수 : <a href="viewComment.do">28</a></span>
+        	<span class="count">내가 쓴 글 갯수 : <a href="myDiary.do">${requestScope.b_count }</a></span>
+        	<span class="count">내가 쓴 댓글 수 : <a href="viewComment.do">${requestScope.c_count }</a></span>
         		<tr>
         			<th>글번호</th>
         			<th>작성자</th>

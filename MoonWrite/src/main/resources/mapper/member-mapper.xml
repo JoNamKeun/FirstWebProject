@@ -6,4 +6,8 @@
 	<select id="selectOne" resultType="member">
 		select * from members where m_level = 'a'
 	</select>
+	<!--Login XML-->
+	<select id="login" parameterType="java.util.Map" resultType="member">
+		select * from members where m_id like #{id} and m_pw like #{password}
+	</select>
 </mapper>
