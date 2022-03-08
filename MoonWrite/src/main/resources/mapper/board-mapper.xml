@@ -50,6 +50,7 @@
 	
 	<insert id="insertBoard" parameterType="board">
 		insert into
-		board values(#{title}, #{content}, #{chk_info}, #{chk_secret}, #{book_name}, #{b_writer}) 
+		board(title, content, b_kind, b_secret, book_name, b_writer)
+		values(#{title}, #{content}, #{b_kind}, #{b_secret}, #{book_name}, #{b_writer}) 
 	</insert>
 </mapper>

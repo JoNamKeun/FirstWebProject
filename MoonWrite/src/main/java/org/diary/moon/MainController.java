@@ -70,7 +70,7 @@ public class MainController {
 		List<CommentDTO> c_list = commentService.selectCommentList(b_writer);
 		// 작성한 게시글 리스트(하나의 계정)
 
-		writer = regDay(writer);
+//		writer = regDay(writer);
 
 		request.setAttribute("writer", writer);
 
@@ -145,26 +145,26 @@ public class MainController {
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
 		String book_name = request.getParameter("book_name");
-		String chk_info = request.getParameter("chk_info");
-		String chk_secret = request.getParameter("chk_secret");
+		String b_kind = request.getParameter("chk_info");
+		String b_secret = request.getParameter("chk_secret");
 		String b_writer = ((MemberDTO) session.getAttribute("member")).getM_id();
 
-		System.out.println(title + " " + content + " " + chk_info + " " + chk_secret + b_writer);
-		if(chk_info.equals("book")) {
-			chk_info = "b";
+		System.out.println(title + " " + content + " " + b_kind + " " + b_secret + b_writer);
+		if(b_kind.equals("book")) {
+			b_kind = "b";
 		} else {
-			chk_info = "d";
+			b_kind = "d";
 		}
 		
-		if(chk_secret.equals("open")) {
-			chk_secret = "o";
+		if(b_secret.equals("open")) {
+			b_secret = "o";
 		}else {
-			chk_secret = "s";
+			b_secret = "s";
 		}
-		System.out.println(chk_info);
-		boardService.insertBoard(new BoardDTO(title, content, chk_info, chk_secret, book_name, b_writer));
+		System.out.println(b_kind);
+		boardService.insertBoard(new BoardDTO(title, content, b_kind, b_secret, book_name, b_writer));
 
-		return "my_diary";
+		return "redirect:myDiary.do";
 	}
 
 	// 회원가입 매핑

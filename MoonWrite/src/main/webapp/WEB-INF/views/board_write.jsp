@@ -27,7 +27,7 @@
 				</div>
 			</div>
 			<div class="book_search"> <!-- 도서 검색 -->
-				<label>참고 도서</label> <input type="text" placeholder="책 이름을 검색해주세요.">
+				<label>참고 도서</label> <input type="text" placeholder="책 이름을 검색해주세요." name="book_name">
 				<button class="btn_search">검색</button>
 			</div>
 			<div class="board_title"> <!-- 제목 영역 -->
