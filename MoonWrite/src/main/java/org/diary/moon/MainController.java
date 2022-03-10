@@ -2,6 +2,7 @@ package org.diary.moon;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +17,7 @@ import org.diary.moon.dto.BoardDTO;
 import org.diary.moon.dto.CommentDTO;
 import org.diary.moon.dto.MemberDTO;
 import org.diary.moon.paging.BoardPaggingVO;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,7 +38,7 @@ public class MainController {
 
 	@Autowired
 	HttpServletRequest request;
-	
+
 	@RequestMapping("main.do")
 	public String main() {
 		return "main";
@@ -50,7 +52,7 @@ public class MainController {
 	// 메인
 	@RequestMapping("/myDiary.do")
 	public String boardList(HttpSession session) {
-		
+
 		// admin 계정
 		List<MemberDTO> one = memberService.selectOne();
 
@@ -61,11 +63,12 @@ public class MainController {
 		// admin 계정 세션 저장
 		// HttpSession session = null;
 		// session.setAttribute("admin", one);
-		
+
+		if(session.getAttribute("member") == null) return "redirect:/";
 		String b_writer = ((MemberDTO) session.getAttribute("member")).getM_id();
 
 //		String b_writer = "mdalli"; // 임시로 DB에 있는 계정 불러온 변수
-		
+
 		List<BoardDTO> writer = boardService.selectList(b_writer);
 		List<CommentDTO> c_list = commentService.selectCommentList(b_writer);
 		// 작성한 게시글 리스트(하나의 계정)
@@ -93,6 +96,10 @@ public class MainController {
 		BoardPaggingVO vo = new BoardPaggingVO(b_count, page, 7, 4);
 		request.setAttribute("pagging", vo);
 
+		for(int i = 0; i < writer.size(); i++) {
+			System.out.println(writer.get(i).toString());
+		}
+		
 		return "my_diary";
 	}
 
@@ -109,8 +116,9 @@ public class MainController {
 
 	// 작성한 댓글 목록 뷰 매핑
 	@RequestMapping("/viewComment.do")
-	public String viewComent() {
-		String b_writer = "mdalli";
+	public String viewComent(HttpSession session) {
+		
+		String b_writer = ((MemberDTO)session.getAttribute("member")).getM_id();
 		List<CommentDTO> c_list = commentService.selectCommentList(b_writer);
 		int page = 1;
 
@@ -148,17 +156,18 @@ public class MainController {
 		String b_kind = request.getParameter("chk_info");
 		String b_secret = request.getParameter("chk_secret");
 		String b_writer = ((MemberDTO) session.getAttribute("member")).getM_id();
+		String m_name = request.getParameter("m_name");
 
 		System.out.println(title + " " + content + " " + b_kind + " " + b_secret + b_writer);
-		if(b_kind.equals("book")) {
+		if (b_kind.equals("book")) {
 			b_kind = "b";
 		} else {
 			b_kind = "d";
 		}
-		
-		if(b_secret.equals("open")) {
+
+		if (b_secret.equals("open")) {
 			b_secret = "o";
-		}else {
+		} else {
 			b_secret = "s";
 		}
 		System.out.println(b_kind);
@@ -174,43 +183,95 @@ public class MainController {
 	}
 
 	@RequestMapping("boardView.do")
-	public String boardView(int bno, HttpSession session) {
+	public String boardView(int bno, String page, HttpSession session) {
+		// session 정보로 최초 표시될 공감하트 색깔과 [수정, 삭제] 버튼이 결정되기 때문에
+		// boardView 페이지 표시 이전에 session 정보를 읽어와야 하는데요.
+		// 이때, 로그아웃 상태면 session 을 읽어올 때 서버에서 error를 띄웁니다.
+		// jsp에서 sessionCheck 를 걸어놨어도, 서버에서 먼저 에러를 발생시켜서....
+		// 일단 예외처리 해뒀어요.
+
+		// 1) 로그인 유저 정보 확인 및 안전장치+예외처리
+		String id = "";
+		try {
+			id = ((MemberDTO) session.getAttribute("member")).getM_id();
+		} catch (NullPointerException e) {
+			return "redirect:content3.do"; // 로그인 유도
+		}
+
+		// 2) 조회수 증가
+		// HashSet(중복값을 허용하지 않는) 을 session에 set 해서 중복된 bno를 제거
+		HashSet<Integer> set = (HashSet<Integer>) session.getAttribute("pageSet");
+		if (set == null) {
+			set = new HashSet<Integer>();
+			session.setAttribute("pageSet", set);
+		}
+		if (set.add(bno))
+			boardService.addCount(bno);
+
+		// 3) bno로 해당 글 정보와 공감 갯수 찾기
+		BoardDTO dto = boardService.selectBoard(bno);
+		int bLike = boardService.selectBoardLikeCount(bno);
 		
+		List<CommentDTO> c_list = commentService.selectAllCommentList(bno);
+		
+		request.setAttribute("c_list", c_list);
+		
+		for(int i = 0; i < c_list.size(); i++) {
+			System.out.println(c_list.get(i).toString());
+		}
+
+		// 4) 지금 로그인 한 사용자가 이 글에 공감을 눌렀는가?? 를 확인.
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("m_id", id);
+		map.put("bno", bno);
+
+		int userLikeTrue = 0;
+		userLikeTrue = boardService.selectUserLikeTrue(map);
+
+		// 5) 날짜에서 시간부분 짜르기
+		String tmpDate = dto.getRegist_day().split(" ")[0];
+		dto.setRegist_day(tmpDate);
+
+		// jsp 에서 식별해야 할 정보 셋팅
+		session.setAttribute("id", id);
+		request.setAttribute("board", dto);
+		request.setAttribute("bLike", bLike);
+		request.setAttribute("userLikeTrue", userLikeTrue);
+		request.setAttribute("page", page);
+
 		return "board_view";
 	}
-	
+
 	@RequestMapping("/boardLike.do")
-	public String boardLike(int bno, String id,  HttpServletResponse response) throws IOException {
-		
-		//공감 하트를 눌렀을 때 ajax 를 타고 bno와 session-id 값을 가지고 넘어옵니다.
-		
+	public String boardLike(int bno, String id, HttpServletResponse response) throws IOException {
+
+		// 공감 하트를 눌렀을 때 ajax 를 타고 bno와 session-id 값을 가지고 넘어옵니다.
+
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("bno", bno);
 		map.put("m_id", id);
-		
-		
-		//공감 테이블에 m_id 와 bno 를 insert 할 때, 만약 이 정보가 공감테이블에 있다면
-		//SQL Exception이 발생됩니다. (pk제약조건 충돌)
-		//때문에 예외처리를 하고 catch 영역에서 그 정보를 지우는 방식으로 원클릭 공감/비공감 을 구현했습니다.
+
+		// 공감 테이블에 m_id 와 bno 를 insert 할 때, 만약 이 정보가 공감테이블에 있다면
+		// SQL Exception이 발생됩니다. (pk제약조건 충돌)
+		// 때문에 예외처리를 하고 catch 영역에서 그 정보를 지우는 방식으로 원클릭 공감/비공감 을 구현했습니다.
 		int count = 0;
 		try {
 			count = boardService.insertBoardLike(map);
-		}catch (Exception e) {
-			//여기 들어왔다는건 공감테이블에 id+bno 정보가 이미 있다는 것!! (공감버튼을 눌렀다는 얘기)
+		} catch (Exception e) {
+			// 여기 들어왔다는건 공감테이블에 id+bno 정보가 이미 있다는 것!! (공감버튼을 눌렀다는 얘기)
 			boardService.deleteBoardLike(map);
 		}
-		
-		//json 객체에 공감인지 비공감인지 여부(result), 공감 갯수 셋팅
+
+		// json 객체에 공감인지 비공감인지 여부(result), 공감 갯수 셋팅
 		JSONObject obj = new JSONObject();
 		obj.put("result", count);
 		obj.put("count", boardService.selectBoardLikeCount(bno));
-		
-		response.getWriter().write(obj.toString());
-		
-		return null;
-		
-	}
 
+		response.getWriter().write(obj.toString());
+
+		return null;
+
+	}
 
 	// index에서 로그인 버튼 눌렀을 때, 로그인 화면으로 이동하는 메서드
 	@RequestMapping("/loginView.do")
@@ -245,11 +306,80 @@ public class MainController {
 		}
 
 	}
-	
+
 	@RequestMapping("logout.do")
 	public String logOut(HttpSession session) {
 		session.invalidate();
 		return "index";
+	}
+	
+	@RequestMapping("updateView.do")
+	public String updateView(HttpSession session, int bno) {
+		BoardDTO dto = boardService.selectBoard(bno);
+		request.setAttribute("board", dto);
+		return "board_update_view";
+	}
+	
+	@RequestMapping("updateBoard.do")
+	public String update(int bno, HttpSession session) {
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
+		String book_name = request.getParameter("book_name");
+		String b_kind = request.getParameter("chk_info");
+		String b_secret = request.getParameter("chk_secret");
+		String b_writer = ((MemberDTO) session.getAttribute("member")).getM_id();
+		String m_name = request.getParameter("m_name");
+
+		System.out.println(title + " " + content + " " + b_kind + " " + b_secret + b_writer);
+		if (b_kind.equals("book")) {
+			b_kind = "b";
+		} else {
+			b_kind = "d";
+		}
+
+		if (b_secret.equals("open")) {
+			b_secret = "o";
+		} else {
+			b_secret = "s";
+		}
+		System.out.println(b_kind);
+		boardService.updateBoard(new BoardDTO(bno, title, content, b_kind, b_secret, book_name));
+
+		return "redirect:myDiary.do";
+	}
+	
+	@RequestMapping("deleteBoard.do")
+	public String deleteBoard() {
+		int bno = Integer.parseInt(request.getParameter("bno"));
+		int page = Integer.parseInt(request.getParameter("page"));
+		boardService.deleteBoard(bno);
+		System.out.println(bno + " " + page);
+		return "redirect:myDiary.do?page="+page;
+	}
+	
+	@RequestMapping("commentAdd.do")
+	public String addComment(int c_bno, HttpSession session, HttpServletResponse response) throws IOException {
+		String content = request.getParameter("comment_area");
+		String c_writer = ((MemberDTO)session.getAttribute("member")).getM_id();
+		
+		System.out.println(content + " " + c_bno);
+		int count = commentService.addComment(new CommentDTO(c_bno, c_writer, content));
+		List<CommentDTO> c_list = null;
+		
+		if(count > 0) {
+			c_list = commentService.selectComment(c_bno);
+		}
+		
+		
+		JSONArray arr = new JSONArray(c_list);
+		for(int i = 0; i < c_list.size(); i++) {
+			System.out.println(arr.get(i).toString()); 
+		}
+		
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(arr.toString());
+		
+		return null;
 	}
 
 }

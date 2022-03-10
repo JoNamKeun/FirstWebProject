@@ -17,25 +17,7 @@
 </style>
 </head>
 <body>
-    <div class="logo_menu">
-        <header>
-            <img src="/resource/img/logo.png" alt="logo" id="header_logo">
-            <div class="title">
-                <h2>Moon Write</h2>
-            </div>
-        </header>
-        <nav>
-            <div class="header">
-                <ul>
-                    <li>아이디(닉네임)님<br><p>정보수정 / 로그아웃</p></li>
-                    <li class="on" class="a"><a href=".content1">메인페이지</a></li>
-                    <li><a href=".content2">My Diary</a></li>
-                    <li><a href=".content3">사람들의 이야기</a></li>
-                    <li><a href=".content4">책 추천</a></li>
-                </ul>
-            </div>
-        </nav>
-    </div>
+    <%@ include file="../include/menuBar.jsp"%>
     <div class="content">
         <!-- 여기 영역이 내용이 나올 영역입니다.
         여기서 작업을 해주시면 됩니다. -->

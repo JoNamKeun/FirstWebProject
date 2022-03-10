@@ -1,0 +1,103 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'KyoboHandwriting2020A';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2112@1.0/KyoboHandwriting2020A.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'KyoboHandwriting2020A';
+}
+
+body{
+    background-color: #153259;
+    box-sizing: border-box;
+    color: white;
+    margin: 0 auto;
+    width: 1500px;
+    display: flex;
+    flex-direction: row;
+}
+
+.logo_menu{
+    width: 500px;
+    height: auto;
+    margin: 0 auto;
+    margin-top: 50px;
+    position: fixed;
+    border: 1px solid yellow;
+    text-align: center;
+}
+
+.logo_menu header{
+    height: 300px;
+}
+
+.logo_menu nav{
+    top: 500px;
+    margin-top: 30px;
+}
+
+.logo_menu header img{
+    padding: 10px;
+    box-sizing: border-box;
+    margin: 0 auto;
+    width: 240px;
+    height: 240px;
+}
+
+.title{
+    text-align: center;
+    font-size: 30px;
+}
+
+ul, ol{list-style:none}
+ul{
+    display: flex;
+    flex-direction: column;
+}
+
+ul li a{
+    width: auto;
+}
+.header ul:after{
+	content:"";
+	display:block;
+	clear:both
+}
+.header ul li{
+	float:left;
+	border-left:1px solid rgba(255, 255, 255, 0);
+    box-sizing:border-box;
+    width:100%; 
+    margin-top: 50px;
+}
+.header ul li:first-child{ border-left:none; }
+.header ul li a{
+	display:block;
+	height:60px;
+	text-align:center;
+    line-height:60px;
+    font-size:20px;
+    text-decoration:none;
+    color:#fff;
+}
+
+.header ul li a:hover{
+    border-radius: 10px;
+    background-color: #ffe647;
+    color: black;
+    margin: 0 150px;
+    cursor: pointer;
+}
+
+.span_information:hover,
+.span_logout:hover{
+	cursor: pointer;
+}
+
+/* menu 영역 여기까지*/

@@ -20,23 +20,6 @@
 		parameterType="String">
 		select * from board where b_writer = #{b_writer}
 	</select>
-	
-	<select id="selectBoard" parameterType="int" resultType="board">
-		select * from board_no_secret_list where bno=#{bno}
-	</select>
-
-
-	<select id="selectBoardLikeCount" parameterType="int"
-		resultType="int">
-		select count(*) from board_like where bno=#{bno}
-	</select>
-
-	<select id="selectUserLikeTrue" parameterType="java.util.Map"
-		resultType="int">
-		select count(*) from board_like
-		where m_id like #{m_id} and bno = #{bno}
-	</select>
-
 
 	<insert id="insertBoardLike" parameterType="map">
 		insert into
@@ -47,10 +30,43 @@
 		delete from
 		board_like where m_id like #{m_id} and bno = #{bno}
 	</delete>
-	
+
 	<insert id="insertBoard" parameterType="board">
 		insert into
-		board(title, content, b_kind, b_secret, book_name, b_writer)
-		values(#{title}, #{content}, #{b_kind}, #{b_secret}, #{book_name}, #{b_writer}) 
+		board(title,
+		content, b_kind, b_secret, book_name, b_writer)
+		values(#{title},
+		#{content}, #{b_kind}, #{b_secret}, #{book_name}, #{b_writer})
 	</insert>
+
+	<update id="addCount" parameterType="int">
+		update board set b_count = b_count + 1 where bno = #{bno}
+	</update>
+
+	<select id="selectBoard" parameterType="int" resultType="board">
+		select * from board_list where bno=#{bno}
+	</select>
+
+
+	<select id="selectBoardLikeCount" parameterType="int"
+		resultType="int">
+		select count(*) from board_like where bno=#{bno}
+	</select>
+
+
+	<select id="selectUserLikeTrue" parameterType="java.util.Map"
+		resultType="int">
+		select count(*) from board_like
+		where m_id like #{m_id} and bno = #{bno}
+	</select>
+	
+	<update id="updateBoard" parameterType="board">
+		update board set
+		title = #{title}, content = #{content}, b_kind = #{b_kind}, b_secret = #{b_secret}, book_name = #{book_name}
+		where bno = #{bno}
+	</update>
+	
+	<delete id="deleteBoard" parameterType="int">
+		delete from board where bno = #{bno}		
+	</delete>
 </mapper>

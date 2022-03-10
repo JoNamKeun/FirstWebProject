@@ -94,7 +94,7 @@ ul li a{
     margin: 0 150px;
 }
 
-/* menu ¿µ¿ª ¿©±â±îÁö*/
+/* menu ì˜ì—­ ì—¬ê¸°ê¹Œì§€*/
 
 .content{
     width: 1000px;
@@ -103,10 +103,10 @@ ul li a{
     margin-top: 50px;
     text-align: center;
     padding: 10px;
-    border: 1px solid red; /* ÀÛ¾÷ÇÏ½Ç ¶§ ÇØ´ç ºÎºĞÀº Áö¿ì°í ÇÏ¼Åµµ µË´Ï´Ù. */
+    border: 1px solid red; /* ì‘ì—…í•˜ì‹¤ ë•Œ í•´ë‹¹ ë¶€ë¶„ì€ ì§€ìš°ê³  í•˜ì…”ë„ ë©ë‹ˆë‹¤. */
 }
 
-/* ¿ìÃø ÇÏ´Ü¿¡ ÀÖ´Â À§·Î ¿Ã¸®´Â ¹öÆ° */
+/* ìš°ì¸¡ í•˜ë‹¨ì— ìˆëŠ” ìœ„ë¡œ ì˜¬ë¦¬ëŠ” ë²„íŠ¼ */
 .btn_up{ 
 	top: 90%;
 	left: 90%;
@@ -123,7 +123,7 @@ ul li a{
 	background-color: #153259;
 	color: #ffe647;
 }
-/* ¿ìÃø ÇÏ´Ü¿¡ ÀÖ´Â À§·Î ¿Ã¸®´Â ¹öÆ° */
+/* ìš°ì¸¡ í•˜ë‹¨ì— ìˆëŠ” ìœ„ë¡œ ì˜¬ë¦¬ëŠ” ë²„íŠ¼ */
 
 .content1{
     margin-top: 100px;
@@ -187,7 +187,7 @@ ul li a{
 .p_name{
     float: right;
 }
-/* ¾Ö´Ï¸ŞÀÌ¼Ç È¿°ú css */
+/* ì• ë‹ˆë©”ì´ì…˜ íš¨ê³¼ css */
 @keyframes backimage {
     from{ opacity: 1;}
     to{ opacity: 0.4;}

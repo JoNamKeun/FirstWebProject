@@ -53,5 +53,17 @@ public class BoardService {
 		mapper.insertBoard(boardDTO);
 	}
 
+	public void addCount(int bno) {
+		mapper.addCount(bno);
+	}
+
+	public void updateBoard(BoardDTO boardDTO) {
+		mapper.updateBoard(boardDTO);
+	}
+
+	public void deleteBoard(int bno) {
+		mapper.deleteBoard(bno);
+	}
+
 	
 }

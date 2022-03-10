@@ -10,4 +10,10 @@ public interface CommentMapper {
 
 	List<CommentDTO> selectCommentList(String b_writer);
 
+	List<CommentDTO> selectAllCommentList(int bno);
+
+	int addComment(CommentDTO commentDTO);
+
+	List<CommentDTO> selectComment(int c_bno);
+
 }

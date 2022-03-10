@@ -1,4 +1,6 @@
-@font-face {
+@charset "UTF-8";
+
+@charset "UTF-8";@font-face {
     font-family: 'KyoboHandwriting2020A';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2112@1.0/KyoboHandwriting2020A.woff') format('woff');
     font-weight: normal;
@@ -19,7 +21,7 @@ body{
     width: 1500px;
     display: flex;
     flex-direction: row;
-    background-image: url("resource/img/back2.jpg");
+    background-image: url("/resource/img/back_img.jpg");
 }
 
 input, textarea{
@@ -42,7 +44,7 @@ input::placeholder, textarea::placeholder{
 .logo_menu{
     background-color: rgba(21, 50, 89, 0.2);
     width: 500px;
-    height: 1000px;
+    height: auto;
     margin: 30px auto;
     position: fixed;
     text-align: center;
@@ -70,9 +72,10 @@ input::placeholder, textarea::placeholder{
     font-size: 30px;
 }
 
-/*html, body{overflow-y:hidden}*/
-ul, ol{list-style:none}
-/* .header{position:fixed;z-index:10;top:0;width:100%} */
+ul, ol{
+	list-style:none;
+}
+
 ul{
     display: flex;
     flex-direction: column;
@@ -81,13 +84,30 @@ ul{
 ul li a{
     width: auto;
 }
-.header ul:after{content:"";display:block;clear:both}
-.header ul li{float:left;border-left:1px solid rgba(255, 255, 255, 0);
-    box-sizing:border-box;width:100%; margin-top: 50px;}
-.header ul li:first-child{border-left:none}
-.header ul li a{display:block;height:60px;text-align:center;
-    line-height:60px;font-size:20px;text-decoration:none;
-    color:#fff}
+.header ul:after{
+	content:"";
+	display:block;
+	clear:both
+}
+.header ul li{
+	float:left;
+	border-left:1px solid rgba(255, 255, 255, 0);
+    box-sizing:border-box;
+    width:100%; 
+    margin-top: 50px;
+}
+.header ul li:first-child{
+	border-left:none;
+}
+.header ul li a{
+	display:block;
+	height:60px;
+	text-align:center;
+    line-height:60px;
+    font-size:20px;
+    text-decoration:none;
+    color:#fff;
+}
 
 .header ul li a:hover{
     border-radius: 10px;
@@ -104,7 +124,7 @@ ul li a{
     background-color: rgba(21, 50, 89, 0.2);
     box-sizing: border-box;
     width: 1000px;
-    height: 700px;
+    height: auto;
     margin-left: 500px;
     margin-top: 150px;
     margin-bottom: 150px;
@@ -117,8 +137,8 @@ ul li a{
     width: 1000px;
 }
 
-.board_write{
-    width: 980px;
+.board_update{
+    width: auto;
     margin: 0;
     margin-top: 30px;
     text-align: center;
@@ -132,11 +152,11 @@ ul li a{
     text-align: center;
 }
 
-.board_write div input{
+.board_update div input{
     margin-left: 10px;
 }
 
-.board_write div label {
+.board_update div label {
     font-size: 20px;
     margin-left: 10px;
 }
@@ -165,9 +185,9 @@ ul li a{
 button,
 button::after {
   -webkit-transition: all 0.3s;
-   -moz-transition: all 0.3s;
+	-moz-transition: all 0.3s;
   -o-transition: all 0.3s;
-   transition: all 0.3s;
+	transition: all 0.3s;
 }
 
 button {
@@ -223,7 +243,6 @@ button:hover {
     width: 700px;
     height: 300px;
     line-height: 30px;
-     resize: none;
 }
 
 .btn_group{

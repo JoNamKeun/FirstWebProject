@@ -1,0 +1,160 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'KyoboHandwriting2020A';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2112@1.0/KyoboHandwriting2020A.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'KyoboHandwriting2020A';
+}
+
+body{
+    background-color: #153259;
+    box-sizing: border-box;
+    color: white;
+    margin: 0 auto;
+    width: 1500px;
+    display: flex;
+    flex-direction: row;
+}
+
+.logo_menu{
+    width: 500px;
+    height: auto;
+    margin: 0 auto;
+    margin-top: 50px;
+    position: fixed;
+    border: 1px solid yellow;
+    text-align: center;
+}
+
+.logo_menu header{
+    height: 300px;
+}
+
+.logo_menu nav{
+    top: 500px;
+    margin-top: 30px;
+}
+
+.logo_menu header img{
+    padding: 10px;
+    box-sizing: border-box;
+    margin: 0 auto;
+    width: 240px;
+    height: 240px;
+}
+
+.title{
+    text-align: center;
+    font-size: 30px;
+}
+
+/*
+.content div{position:relative; padding-top: 30px;}
+.content div p{position:absolute;
+    top:30%;margin-top:-40px;
+    text-align:center;width:100%;
+    font-size:50px;font-weight:bold;color:#fff}
+html, body{overflow-y:hidden}
+.header{position:fixed;z-index:10;top:0;width:100%} */
+ul, ol{list-style:none}
+ul{
+    display: flex;
+    flex-direction: column;
+}
+
+ul li a{
+    width: auto;
+}
+.header ul:after{content:"";display:block;clear:both}
+.header ul li{float:left;border-left:1px solid rgba(255, 255, 255, 0);
+    box-sizing:border-box;width:100%; margin-top: 50px;}
+.header ul li:first-child{border-left:none}
+.header ul li a{display:block;height:60px;text-align:center;
+    line-height:60px;font-size:20px;text-decoration:none;
+    color:#fff}
+
+.header ul li a:hover{
+    border-radius: 10px;
+    background-color: #ffe647;
+    color: black;
+    margin: 0 150px;
+}
+
+/* menu 영역 여기까지*/
+
+.content{
+    width: 1000px;
+    margin: 0 auto;
+    margin-left: 500px;
+    margin-top: 50px;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid red; /* 작업하실 때 해당 부분은 지우고 하셔도 됩니다. */
+}
+
+button{
+    float: right;
+}
+
+.btn_member, .btn_board{
+    width: 100px;
+    height: 30px;
+}
+
+.btn_hide{
+    visibility: hidden;
+}
+
+.btn_member{
+    margin-bottom: 30px;
+}
+
+table{
+    border-collapse: collapse;
+    border: 1px solid white;
+    width: 1000px;
+    margin: 0 auto;
+    margin-top: 30px;
+    font-size: 18px;
+    font-weight: none;
+}
+tr,td,th{
+    text-align: center;
+    border: 1px solid white;
+    height: 50px;
+}
+
+th{
+    background-color: #ffe647;
+    color: black;
+}
+
+tr th:nth-of-type(1){
+    width: 100px;
+}
+tr th:nth-of-type(2){
+    width: 500px;
+}
+tr th:nth-of-type(3){
+    width: 200px;
+}
+tr th:nth-of-type(4){
+    width: 150px;
+}
+tr th:nth-of-type(5){
+    width: 100px;
+}
+
+.table_title{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    text-align: left;
+}

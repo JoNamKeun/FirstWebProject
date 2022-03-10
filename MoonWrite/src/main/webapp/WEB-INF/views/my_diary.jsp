@@ -8,8 +8,13 @@
 <title>Moon Write</title>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <link rel="stylesheet" href="resource/css/my_diary.css">
+<link rel="stylesheet" href="resource/css/menuBar.css">
+
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <!-- <script src="/resource/js/main_scroll.js"></script> -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	
 <link rel="icon" href="/resource/img/diary.png">
 <style type="text/css">
 	
@@ -37,8 +42,8 @@
         			<tr>
         				<td>${board.bno}</td>
         				<td>${board.b_kind}</td>
-        				<td>${board.b_writer}</td>
-        				<td><a href="boardView.do?bno=${board.bno}">${board.title}</a></td>
+        				<td>${board.m_name}</td>
+        				<td><a href="boardView.do?bno=${board.bno}&page=${pagging.currentPageNo}">${board.title}</a></td>
         				<td>${board.regist_day}</td>
         			</tr>
         		</c:forEach>

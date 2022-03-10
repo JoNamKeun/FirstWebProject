@@ -27,4 +27,10 @@ public interface BoardMapper {
 
 	void insertBoard(BoardDTO boardDTO);
 
+	void addCount(int bno);
+
+	void updateBoard(BoardDTO boardDTO);
+
+	void deleteBoard(int bno);
+
 }

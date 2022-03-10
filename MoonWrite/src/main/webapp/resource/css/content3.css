@@ -1,0 +1,192 @@
+@charset "UTF-8";
+
+
+body{
+	    background-image: url("/resource/img/back_img.jpg");
+}
+
+.content {
+	width: 1000px;
+	text-align: left;
+	/*  border: 4px solid red;  */
+	margin-left: 560px; 
+}
+
+.content3-title{
+	height: 150px !important;
+	font-style: italic;
+	font-size: 40px;
+	margin-top: 100px;
+}
+
+.span-moon{
+	color: #ffe647;
+}
+
+.content3-table{
+	margin-top: 30px;
+	height: auto !important;
+	}
+
+.content3-table table{
+	width: 950px;
+	margin: 0 auto;
+	text-align: center;
+	border-collapse: collapse;
+	table-layout: fixed;
+}
+
+
+th, td{
+		text-align: center;
+		padding: 10px 8px;
+}
+
+th{
+	font-size: 24px;
+	color: black;
+	font-weight: normal;
+	background-color: rgba(255,255,198,0.7);
+}
+
+td{
+	font-size: 20px;
+}
+
+tr th:first-child,
+tr td:first-child{
+	width: 30px;
+}
+
+	tr th:nth-child(2),
+	tr td:nth-child(2) {
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		width: 400px;
+	}
+	
+	tr th:nth-child(3),
+	tr td:nth-child(3) {
+		width: 150px;
+	}
+	
+		tr th:nth-child(4),
+		tr td:nth-child(4) {
+		width: 150px;
+	}
+	
+		tr th:nth-child(5),
+		tr td:nth-child(5) {
+		width: 75px;
+	}
+	
+	
+	td a:link,
+	td a:visited{
+		text-decoration: none;
+		color: white;
+	}
+	
+	
+	
+
+	
+	.content3-ddMenu{
+		height: auto !important;
+		text-align: right;
+	}
+	
+	
+	select {
+		text-align: center;
+		padding: 5px;
+		font-family: monospace;
+		font-weight: 800;
+		line-height: 1.5;
+		background-color: #D5D5D5;
+		border: 2px solid white;
+	}
+	
+	option{
+			font-family: monospace;
+			font-weight: 800;
+			background: #D5D5D5
+	}
+	
+	.form-input{
+		font-size: 16px;
+		padding: 5px;
+		font-family: monospace;
+		border-radius: 5px;
+	}
+	
+
+	
+	
+	
+	.pagging{
+		height: 60px !important;
+		text-align: center;
+		font-size: 28px;	
+		margin-top: 10px;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+	}
+	
+	.pagging-search{
+		align-self: center;
+	}
+	
+	.keyword{
+		font-family: monospace;
+		font-size: 16px;
+		padding: 5px 2px;
+	}
+	.pagging-btn-search{
+		font-family: monospace;
+		font-size: 16px;
+		font-weight: 800;
+		padding: 5px;
+		border-radius: 5px;
+	}
+	
+	
+		
+	.pagging-no a:link,
+	.pagging-no a:visited{
+		text-decoration: none;
+		color: white;
+	}
+	
+	.selectPage{
+		color: #ffe647;
+	}
+	
+	.pagging-no{
+		align-self: center;
+	}
+	
+	
+	.pagging-btn-write{
+		width: 100px;
+		height: 40px;
+		font-family: monospace;
+		font-size: 16px;
+		font-weight: 800;
+		padding: 1px 5px;
+		border-radius: 5px;
+	   align-self: center;
+	}
+
+	button:hover{
+		background-color: #ffe647;
+	}
+
+
+
+
+
+
+
