@@ -65,5 +65,21 @@ public class BoardService {
 		mapper.deleteBoard(bno);
 	}
 
+	public int selectBoardCount() {
+		return mapper.selectBoardCount();
+	}
+
+	public List<BoardDTO> selectPageBoard(int pageNo) {
+		return mapper.selectPageBoard(pageNo);
+	}
+
+	public int selectKindBoardCount(String kind) {
+		return selectKindBoardCount(kind);
+	}
+
+	public List<BoardDTO> selectKind(Map<String, Object> map) {
+		return selectKind(map);
+	}
+
 	
 }

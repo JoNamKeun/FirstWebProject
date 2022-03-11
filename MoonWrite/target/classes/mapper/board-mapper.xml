@@ -40,11 +40,13 @@
 	</insert>
 
 	<update id="addCount" parameterType="int">
-		update board set b_count = b_count + 1 where bno = #{bno}
+		update board set b_count =
+		b_count + 1 where bno = #{bno}
 	</update>
 
 	<select id="selectBoard" parameterType="int" resultType="board">
-		select * from board_list where bno=#{bno}
+		select *
+		from board_list where bno=#{bno}
 	</select>
 
 
@@ -57,16 +59,78 @@
 	<select id="selectUserLikeTrue" parameterType="java.util.Map"
 		resultType="int">
 		select count(*) from board_like
-		where m_id like #{m_id} and bno = #{bno}
+		where m_id like #{m_id} and
+		bno = #{bno}
 	</select>
-	
+
 	<update id="updateBoard" parameterType="board">
 		update board set
-		title = #{title}, content = #{content}, b_kind = #{b_kind}, b_secret = #{b_secret}, book_name = #{book_name}
+		title =
+		#{title}, content = #{content}, b_kind = #{b_kind}, b_secret =
+		#{b_secret}, book_name = #{book_name}
 		where bno = #{bno}
 	</update>
-	
+
 	<delete id="deleteBoard" parameterType="int">
-		delete from board where bno = #{bno}		
+		delete from board where
+		bno = #{bno}
 	</delete>
+
+	<!-- =========================================================================================================== -->
+
+	<select id="selectBoardCount" resultType="int">
+		select count(*) from
+		board_no_secret_list
+	</select>
+
+	<select id="selectPageBoard" resultType="board"
+		parameterType="int">
+		select * from (
+		select ceil(rownum/7) as pageno, b.* from
+		(
+		select*from board_no_secret_list order by bno desc) b)
+		where pageno=
+		#{pageNo}
+	</select>
+
+	<select id="selectKind" resultType="board"
+		parameterType="java.util.Map">
+		select * from (
+		select ceil(rownum/7) as pageno, b.* from
+		(
+		select * from board_no_secret_list where b_kind = #{kind}
+		order by bno
+		desc) b)
+		where pageno= #{page}
+	</select>
+
+	<select id="selectKindBoardCount" resultType="int"
+		parameterType="java.lang.String">
+		select count(*) from board_no_secret_list where b_kind like #{kind}
+	</select>
+
+	<select id="selectKeywordBoardCount" resultType="int"
+		parameterType="java.lang.String">
+		select count(*) from board_no_secret_list
+		where content like '%' || #{keyword} || '%'
+		or title like '%' || #{keyword} || '%'
+	</select>
+
+	<select id="selectKeyword" resultType="board"
+		parameterType="java.util.Map">
+		select * from (
+		select ceil(rownum/7) as pageno, b.* from (
+		select * from
+		board_no_secret_list
+		where content like '%' || #{keyword} || '%'
+		or
+		title like '%' || #{keyword} || '%'
+		order by bno desc) b)
+		where pageno=
+		#{page}
+	</select>
+
+
+
+
 </mapper>

@@ -64,7 +64,8 @@ public class MainController {
 		// HttpSession session = null;
 		// session.setAttribute("admin", one);
 
-		if(session.getAttribute("member") == null) return "redirect:/";
+		if (session.getAttribute("member") == null)
+			return "redirect:/";
 		String b_writer = ((MemberDTO) session.getAttribute("member")).getM_id();
 
 //		String b_writer = "mdalli"; // 임시로 DB에 있는 계정 불러온 변수
@@ -96,10 +97,10 @@ public class MainController {
 		BoardPaggingVO vo = new BoardPaggingVO(b_count, page, 7, 4);
 		request.setAttribute("pagging", vo);
 
-		for(int i = 0; i < writer.size(); i++) {
+		for (int i = 0; i < writer.size(); i++) {
 			System.out.println(writer.get(i).toString());
 		}
-		
+
 		return "my_diary";
 	}
 
@@ -117,8 +118,8 @@ public class MainController {
 	// 작성한 댓글 목록 뷰 매핑
 	@RequestMapping("/viewComment.do")
 	public String viewComent(HttpSession session) {
-		
-		String b_writer = ((MemberDTO)session.getAttribute("member")).getM_id();
+
+		String b_writer = ((MemberDTO) session.getAttribute("member")).getM_id();
 		List<CommentDTO> c_list = commentService.selectCommentList(b_writer);
 		int page = 1;
 
@@ -211,12 +212,12 @@ public class MainController {
 		// 3) bno로 해당 글 정보와 공감 갯수 찾기
 		BoardDTO dto = boardService.selectBoard(bno);
 		int bLike = boardService.selectBoardLikeCount(bno);
-		
+
 		List<CommentDTO> c_list = commentService.selectAllCommentList(bno);
-		
+
 		request.setAttribute("c_list", c_list);
-		
-		for(int i = 0; i < c_list.size(); i++) {
+
+		for (int i = 0; i < c_list.size(); i++) {
 			System.out.println(c_list.get(i).toString());
 		}
 
@@ -312,14 +313,14 @@ public class MainController {
 		session.invalidate();
 		return "index";
 	}
-	
+
 	@RequestMapping("updateView.do")
 	public String updateView(HttpSession session, int bno) {
 		BoardDTO dto = boardService.selectBoard(bno);
 		request.setAttribute("board", dto);
 		return "board_update_view";
 	}
-	
+
 	@RequestMapping("updateBoard.do")
 	public String update(int bno, HttpSession session) {
 		String title = request.getParameter("title");
@@ -347,39 +348,108 @@ public class MainController {
 
 		return "redirect:myDiary.do";
 	}
-	
+
 	@RequestMapping("deleteBoard.do")
 	public String deleteBoard() {
 		int bno = Integer.parseInt(request.getParameter("bno"));
 		int page = Integer.parseInt(request.getParameter("page"));
 		boardService.deleteBoard(bno);
 		System.out.println(bno + " " + page);
-		return "redirect:myDiary.do?page="+page;
+		return "redirect:myDiary.do?page=" + page;
 	}
-	
+
 	@RequestMapping("commentAdd.do")
 	public String addComment(int c_bno, HttpSession session, HttpServletResponse response) throws IOException {
 		String content = request.getParameter("comment_area");
-		String c_writer = ((MemberDTO)session.getAttribute("member")).getM_id();
-		
+		String c_writer = ((MemberDTO) session.getAttribute("member")).getM_id();
+
 		System.out.println(content + " " + c_bno);
 		int count = commentService.addComment(new CommentDTO(c_bno, c_writer, content));
 		List<CommentDTO> c_list = null;
-		
-		if(count > 0) {
+
+		if (count > 0) {
 			c_list = commentService.selectComment(c_bno);
 		}
-		
-		
+
 		JSONArray arr = new JSONArray(c_list);
-		for(int i = 0; i < c_list.size(); i++) {
-			System.out.println(arr.get(i).toString()); 
+		for (int i = 0; i < c_list.size(); i++) {
+			System.out.println(arr.get(i).toString());
 		}
-		
+
 		response.setContentType("text/html;charset=utf-8");
 		response.getWriter().write(arr.toString());
-		
+
 		return null;
+	}
+
+	// ====================================================================================================================
+
+	@RequestMapping("/content3.do")
+	public String content3(String page, HttpSession session) {
+
+		session.setAttribute("host", "content3.do");
+
+		List<BoardDTO> boardList = null;
+		int pageNo = 1;
+
+		// 기억하는 page 가 있는지?
+		if (page == null)
+			page = "1";
+		else
+			pageNo = Integer.parseInt(page);
+
+		/*
+		 * 전체 게시글 개수 읽어오기 아래 메서드를 실행하기 위해서는 공유여부가 'o'인 글들만 view 로 만든 -->
+		 * board_no_secret_list 를 db에 만들어 줘야 합니다.
+		 */
+		int cnt = boardService.selectBoardCount();
+		BoardPaggingVO vo = new BoardPaggingVO(cnt, pageNo, 7, 4);
+
+		// 게시글 첫 페이지 글목록 읽어오기
+		boardList = boardService.selectPageBoard(pageNo);
+		boardList = regDay(boardList); // 시간 부분 짤라주는 메서드
+
+		// 공유 게시판에 필터가 [일기별로보기], [글귀별로보기], [전체-default], [검색결과보기] 이렇게 4가지 경우이기 때문에,
+		// jsp 에 알려주기 위해 requestScope 를 사용했습니다.
+		request.setAttribute("board_list", boardList);
+		request.setAttribute("pagging", vo);
+		request.setAttribute("kind", null); // 종류, 검색어 없으니까 둘다 null
+		request.setAttribute("keyword", null);
+
+		return "content3";
+	}
+
+	// content3: 드롭다운 메뉴에서 kind 별 list + pagging
+	@RequestMapping("/kindList.do")
+	public String kindList(String kind, String page, HttpServletResponse response) throws IOException {
+
+		// 전체를 선택했다면 그냥 content3.do 로 이동
+		if (kind.equals("a"))
+			return "redirect:content3.do";
+
+		int pageNo = 1;
+		if (page == null)
+			page = "1";
+		else
+			pageNo = Integer.parseInt(page);
+
+		// kind에 맞는 글 갯수만 다시 확인
+		int cnt = boardService.selectKindBoardCount(kind);
+		BoardPaggingVO vo = new BoardPaggingVO(cnt, pageNo, 7, 4);
+
+		Map<String, Object> map = new HashMap<>();
+		map.put("kind", kind);
+		map.put("page", pageNo);
+
+		List<BoardDTO> boardList = boardService.selectKind(map);
+		boardList = regDay(boardList);
+
+		request.setAttribute("board_list", boardList);
+		request.setAttribute("pagging", vo);
+		request.setAttribute("kind", kind);
+		request.setAttribute("keyword", null); // 검색어 없으니까 null
+
+		return "content3";
 	}
 
 }

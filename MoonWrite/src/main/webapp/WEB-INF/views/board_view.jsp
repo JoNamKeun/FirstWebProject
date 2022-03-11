@@ -74,24 +74,23 @@ js 파일을 따로 빼려고 하니 js 코드 안에서 jstl 이 사용되지 �
 	      });
 		
 		$("#btn_add_comment").click(function(){
-			var data = "content="+$("#comment_area").val();
+			let bno = "${board.bno}";
+			var data = "content="+$("#comment_area").val()+"&c_bno="+bno;
 			$.ajax({
-				url : "addComment.do",
+				url : "commentAdd.do",
 				data : data,
 				type : "get",
 				dataType : "json",
 				contentType: "application/json; charset=utf-8",
 				success : function(r){
 					var str = "";
-					for(int i = 0; i < r.length; i++){
-						str += "<p>작성자 : " + r[i].c_writer + "</p><br>";
-						str += "<p>" + r[i].content + "</p>";
+					console.log(r.length);
+					for(let i = 0; i < r.length; i++){
+						str += "<p>작성자 : " + r[i].m_name + "</p>";
+						str += "<p>" + r[i].content + "</p><br>";
 					}
 					$(".text_box").html(str);
-				},
-				error : function({
-					alert("통신 실패");
-				})
+				} 
 			});
 		});
 		
@@ -117,6 +116,7 @@ href 부분을 원하는 페이지로 수정하면 아예 index 페이지로 보
 	<!-- 코드 간소화를 위해 menu 영역을 따로 분리해서 include 받았는데,
 	문제가 된다면 수정할게요~    -->
 	<%@ include file="../include/menuBar.jsp"%>
+	<%@ include file="../include/sessionCheck.jsp"%>
 
 
 	<div class="content">
@@ -139,6 +139,13 @@ href 부분을 원하는 페이지로 수정하면 아예 index 페이지로 보
 					&nbsp;
 					<p class="img-p bLike">${board.b_count}</p>
 				</div>
+				<!-- 자물쇠 -->
+				<c:if test="${board.b_secret eq 's' }">
+					<img alt="" src="../resource/img/unlock_icon.png" class="sec_img">
+				</c:if>
+				<c:if test="${board.b_secret eq 'o' }">
+					<img alt="" src="../resource/img/lock_icon.png" class="sec_img">
+				</c:if>
 
 				<!-- 최초 글보기 화면에 왔을 때
 내가 (로그인한 사용자) 이 게시글에 공감을 누른 상태면 노랑색 하트, 아니면 빈 하트-->
@@ -160,18 +167,20 @@ href 부분을 원하는 페이지로 수정하면 아예 index 페이지로 보
 			<textarea rows="10" cols="100" readonly> ${board.content}</textarea>
 		</div>
 
-		<div>
+		<div class="btn_wmd">
 			<button>글쓰기</button>
 			<button onclick="location.href='updateView.do?bno=${board.bno}'">수정하기</button>
 			<button id="chk_delete">삭제하기</button>
 		</div>
-		
-		<c:forEach var="txt" items="${c_list}">
-			<div class="text_box">
-				<p>작성자 : ${txt.m_name}</p><br>
-				<p>${txt.content}</p>
-			</div>
-		</c:forEach>
+		<hr>
+		<br>
+		<div class="text_box">
+			<c:forEach var="txt" items="${requestScope.c_list}">
+					<p>작성자 : ${txt.m_name}</p>
+					<p>${txt.content}</p><br>
+					<hr><br>
+			</c:forEach>
+		</div>
 		<div>
 			<form action="commentAdd.do">
 				<textarea rows="0" cols="0" id="comment_area" name="comment_area"></textarea><br>

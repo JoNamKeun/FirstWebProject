@@ -37,6 +37,7 @@
         			<th>작성자</th>
         			<th>제목</th>
         			<th>작성일</th>
+        			<th>공개여부</th>
         		</tr>
         		<c:forEach var="board" items="${requestScope.writer}">
         			<tr>
@@ -45,6 +46,14 @@
         				<td>${board.m_name}</td>
         				<td><a href="boardView.do?bno=${board.bno}&page=${pagging.currentPageNo}">${board.title}</a></td>
         				<td>${board.regist_day}</td>
+        				<td>
+        					<c:if test="${board.b_secret eq 's' }">
+        						<img alt="" src="../resource/img/lock_icon.png" class="sec_img">
+        					</c:if>
+        					<c:if test="${board.b_secret eq 'o' }">
+        						<img alt="" src="../resource/img/unlock_icon.png" class="sec_img">
+        					</c:if>
+        				</td>
         			</tr>
         		</c:forEach>
         		<c:if test="${requestScope.pagging != null }">

@@ -33,4 +33,8 @@ public interface BoardMapper {
 
 	void deleteBoard(int bno);
 
+	int selectBoardCount();
+
+	List<BoardDTO> selectPageBoard(int pageNo);
+
 }

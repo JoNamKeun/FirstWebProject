@@ -32,3 +32,8 @@ a:link, a:visited{
     padding: 10px;
     border: 1px solid red; /* 작업하실 때 해당 부분은 지우고 하셔도 됩니다. */
 }
+.sec_img{
+	width: 30px;
+	height: 30px;
+	margin-top: 5px;
+}
